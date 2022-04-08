@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Homework 5 : 3D Transform</title>
+    <style>
+      div.description {
+        max-width: 800px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1><b>CS559: Programming Assignment 5</b></h1>
+    <h5>
+        <p>November 20th, 2021</p>
+        <p>Anna Mikula</p>
+    </h5>
+    <hr></hr>
+    <div class="description">
+      <small>
+        <p>What you are asked to do is to create a visualization similar to the
+          “camera” view of this example (the window on the right) where we
+          visualize what the camera “sees” from its vantage point.</p>
+          <p><b>Requirements:</b></p>
+        <ul>
+          <li><b>Requirement #1.</b> You must have a moveable camera. The motion
+            can either be automatic, or triggered by manipulation of a slider.
+            It is ok for the motion of the camera to be relatively simple
+            (i.e. translation along a line, or motion along a curve).</li>
+          <li><b>Requirement #2.</b> Your 3D world must include a hierarchical
+            model, or a parametric curve (or both!).</li>
+          <li><b>Requirement #3.</b> Your example should make it apparent that
+            you are observing a 3D scene, as opposed to a 2D object. For
+            example, if you drew everything in the 2D plane (just replacing
+            every coordinate (x,y) with a triple (x,y,0) to “make it 3D”), and
+            just translated the entire drawing up/down (to emulate “moving the
+            camera”), this is really just a 2D drawing exercise, not something
+            that feels like 3D. Having the camera “spin around” an object,
+            having a 3D (non-planar) parametric curve, or having a 3D object
+            are good possibilities for showing off the 3D nature of your
+            program.</li>
+          <li><b>Requirement #4.</b> You need to use a projection transform.
+            It can be either orthographic or perspective.
+            The aforementioned viewing demo has examples of both, implemented
+            via glMatrix. </li>
+        </ul>
+      </small>
+    </div><!--end of description div -->
+    <hr></hr>
+    <canvas id="observerCanvas" width="600" height="400" style="border:1px solid #888;"></canvas>
+    <canvas id="cameraCanvas" width="600" height="400" style="border:1px solid #888;"></canvas>
+    <br/>
+    <input id="slider1" type="range" min="0" max="200" /> Help the blue car up the slope!
+    <br/>
+    <input id="slider2" type="range" min="0" max="200" /> Move camera view around scene
+    <script type="text/javascript" src="gl-matrix-min.js"></script>
+    <script src="HW5.js" id="module"></script>
+  </body>
+</html>

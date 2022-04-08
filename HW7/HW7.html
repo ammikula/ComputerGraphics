@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Homework 7 : WebGL</title>
+    <style>
+      div.description, div.ps {
+        max-width: 500px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1><b>CS559: Programming Assignment 7</b></h1>
+    <h5>
+        <p>December 15th, 2021</p>
+        <p>Anna Mikula</p>
+    </h5>
+    <hr></hr>
+    <div class="description">
+      <small>
+        <p>In order to secure at least a “satisfactory” (“3”) grade in this assignment, you can think at a minimum of the world you created in your Programming Assignment #5, and ask yourself how you could implement a similar appearance, but using WebGL this time (ideally, this appearance would be significantly richer!). The minimum requirements will be as follows :</p>
+          <p><b>Requirements:</b></p>
+        <ul>
+          <li><b>Requirement #1.</b> Your scene should include at least one “polyhedral” object with multiple shaded (as opposed to be drawn as “wireframe”, only by their edges) polygonal facets. Those will be typically be comprised of triangles. Your entire object cannot be all flat! (unless if you include several objects in your world, in which case it’s ok for at least one of them to not be flat). We would like to be able to visually appreciate that the Z-buffer visibility algorithm is actually working … “front facing” triangles/polygons, should hide parts of the objects that are located behind them.</li>
+          <li><b>Requirement #2.</b> You should either include diffuse & specular shading in your objects, or use texture mapping (maybe both!). It will not be acceptable to have the entire polygonal object (or objects) show up as a single color, without any variation due to lighting. It is perfectly fine to use vertex colors to customize the coloration of different parts of the model.</li>
+          <li><b>Requirement #3.</b> We would like to see you use at least three different vertex attributes in your shader. Those could be, for example position/color/normal, position/normal/texture-coordinates, etc. If you use more than one shader pairs in your implementation, this restriction is relaxed to: at least one of the shader pairs should use at least 2 vertex attributes.</li>
+          <li><b>Requirement #4.</b> There should be a way to enact some change in the scene, different than just controlling the camera position. This would typically be some modeling transform that moves some part of the scene with respect to the world coordinates, some motion along a curve, a hierarchical modeling apparatus, etc. But at the very mininum, some modeling transform should be applied (in our in-class examples, this was done by a “rotation” transform applied to the cube model).   </li>
+          <li><b>Requirement #5.</b> There should be some way to affect the placement of the camera relative to the scene. In our examples, we have a slider that spins the camera around the scene … similar requirements were stated in programming assignment #5.</li>
+        </ul>
+      </small>
+    </div><!--end of description div -->
+    <hr></hr>
+    <div>
+      <script id="vertexShader" type="not-js">
+        attribute vec3 vPosition;
+        attribute vec3 vNormal;
+        varying vec3 fPosition;
+        varying vec3 fNormal;
+        uniform mat4 uMV;
+        uniform mat4 uMVP;
+        attribute vec3 vColor;
+        varying vec3 fColor;
+
+        void main(void) {
+          gl_Position = uMVP * vec4(vPosition, 1.0);
+          fPosition = (uMV * vec4(vPosition, 1.0)).xyz;
+          fNormal = vNormal;
+          fColor = vColor;
+       }
+      </script>
+
+      <script id="fragmentShader" type="not-js">
+        precision highp float;
+        uniform float time;
+        varying vec3 fPosition;
+        varying vec3 fNormal;
+        uniform mat4 uMV;
+        uniform mat3 uMVn;
+        varying vec3 fColor;
+
+        const float lightI    = 1.0;
+        const float ambientC  = 0.15;
+        const float specularC = .8;
+        const float specularE = 30.0;
+        const float diffuseC = 0.5;
+        const vec3  lightV    = vec3(0.0,-0.3,1.0); // direction of light
+        const vec3  lightCol  = vec3(1.0,1.0,1.0); // light color white
+        const vec3  objectColA = vec3(1.0, 0, 0); // transform from A red
+        const vec3  objectColB = vec3(0, 0, 1.0); // transform to B blue
+
+        void main(void) {
+          vec3 n = normalize(uMVn * fNormal);
+          vec3 s = normalize(lightV);
+          vec3 v = normalize(-fPosition);
+          vec3 h = normalize(v+s);
+          vec3 color = vec3(0.0);
+
+          //time speed and mixing of colors at speed
+          float pct = abs(tan(time));
+          color = mix(objectColA, objectColB, pct);
+
+          //light details
+          vec3 ambient_color  = (ambientC + diffuseC * lightI * max(0.0, dot(n,s))) * color;
+          vec3 specular_color = specularC * pow(max(0.0,dot(n,h)),specularE) *lightCol;
+
+          gl_FragColor = vec4(ambient_color+specular_color,1.0);
+        }
+    </script>
+
+      <canvas id="mycanvas" width="500" height="500" style="border:1px solid #888;"></canvas>
+      <br/>
+      <input id="slider1" type="range" min="0" max="100" />
+      <input id="slider2" type="range" min="0" max="100" />
+      <script type="text/javascript" src="gl-matrix-min.js"></script>
+      <script src="HW7.js" id="module"></script>
+    </div>
+  </body>
+  <div class="ps">
+    <p>I wanted to make this change colors as I did with assignment #6 but could not figure it out, if you have time or are curious, please comment what I was missing if you can tell. Thank you so much, happy holidays! </p>
+    <a href="http://shdr.bkcore.com/#1/dVRRb9owEP4rp/Ql0AwoUGkq4qGdtr1s06RJe1kmZBIHjJJzFDuUUvW/92yHJKbwEJB833333d1nvwapTOqCo1bBw7/gRmQpz+D7j9XXPzGWFU+EEhJhKzbbErJcMr2I8YZjKrIYY6xRZLIqXAS0KDiF96x6EbiBPU9mkP2WSmji+BD4RYksX3QkdDyFiiuZ101CjOMx6REoOCQyl5WCWvEUBILaspS4YkwkKt0IYMVaUCurRPIsA4Al3I0mCxiPC0YpPlaVPKlzVp3ALTanXvUVLD+UYHlnEwcmlK6Y0j0ptjuwLKtU0AhNM5RizsPpaBI136AtBh1szyvND5eobP/gqlsqkhuZb+ZRWZiZm1kGFOLgTh59SrneUUHH+djjnIzu7iP7Q8xE+5Ho6TrRky9uQkSfzc/UEtH6pUjBbCIcxPgaIzgOp3sJaP0gjjw8m53JbrDo4RoL9eLci39qzdeDbGsPBCG/tfV6EDfqdiQTFzJfMw3yA7mQYWrmYhwts5M/nVt4atDOPGViumNrFWqGockfOMJTGeIIvYVE/lgjQ9HX0JiGayZy1aruzG+Nsjy/DUNXsGuzdwOckLMrMYRSPocFO5gZRKnUIUY0vcEg6t+HAQx7Bu2pVFx3txRgk6++VWzzpZvtPPQk3/p6InMfTddvQRRce4mY1pVY15q7jsrurTmL4PljUzB9Ov3JCHrwY3MoZMrzv4I/Xw6Xldw5e7bxK8/b1efw0o1o0jwb91XSUtA3/dx0bVzk6yWgHfFpJGac9y6p1UBZFB4dXo6LZkP9yFmD1g7K7uN/FNhqwYP7V2NVHxkiX5ntjHYqeHsH
+">Click here for my assignment #6 </a>
+  </div>
+</html>

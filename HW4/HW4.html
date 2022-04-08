@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Homework 4 : Parametric Curves</title>
+    <style>
+      div.description {
+        max-width: 800px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1><b>CS559: Programming Assignment 4</b></h1>
+    <h5>
+        <p>November 10th, 2021</p>
+        <p>Anna Mikula</p>
+    </h5>
+    <hr></hr>
+    <div class="description">
+      <small>
+        <p>You will make a program that uses a parametric curve to define an
+          intricate trajectory, and use this representation both to draw such a curve as
+          well as move/animate an object along it.</p>
+          <p><b>Requirements:</b></p>
+        <ul>
+          <li><b>Requirement #1.</b> Your drawing has to include, at minimum, one of the following:
+            <ul><li>(a) A piecewise-defined curve, that shifts from one formula to another,
+              that is also closed in the sense that the curve returns to the place where it started,
+              forming a closed “loop”; note that this is different from the example we saw in class,
+              where all curves, including those that had piecewise-definitions, were “open”</li>
+            <li>(b) Multiple separate curves, out of which one has to have a piecewise-defined formula
+              (i.e. at least two components with different formulas, joined together), but in this case
+              the curves don’t have to be closed (unless you want them to be!).</li></ul>
+          <li><b>Requirement #2.</b> Your drawing needs to have at least one object that is
+            animated using one of the curves defined. It is sufficient to have the parametric
+            curve control only the position of the moving object, but if you want to be extra fancy
+            you can also control the orientation of the moving object.</li>
+          <li><b>Requirement #3.</b> You must “draw” the path of at least one of the curves involved in your scene
+            (consider the way we discussed in our demos, by splitting the curve up into small line segments).
+            It’s ok to have a “switch” of sorts (e.g. the value of a slider) that “turns off” drawing the curve line,
+            if you feel your scene looks better without it! As long as there is the option to display that path, you are good!</li>
+          <li><b>Requirement #4.</b> At the point where the different formulas of a piecewise-defined curve in your scene,
+            you must enforce at least C0-continuity (G1-continuity or higher would be nice; C2 might be overkill,
+            but you are welcome to do it). This is just for one of the junctions in one of your piecewise-defined curves;
+            you are free to use any degree of continuity for all other cases.</li>
+          <li><b>Requirement #5.</b> At least one of the curves you use in your implementation has to be a
+            parametric cubic (Hermite, Bezier, B-spline, etc). It doesn't have to be the case that all
+            components of a piecewise curve will have to be a cubic ... just that somewhere in
+            your scene there must be a curve that has at least one component (if it's a piecewise/component curve)
+            that's a cubic. Frankly, you might find that one of the most natural ways to enforce C1 continuity
+            (if you choose to have at least that degree of smoothness) is to resort to cubics anyhow ...</li>
+        </ul>
+        <p>You are welcome to use either sliders, or automatic animation to “move” your objects along any curve
+          trajectories; use whatever feels best for your vision of the scene you want to create!</p>
+      </small>
+    </div><!--end of description div -->
+    <hr></hr>
+    <h3>Help the cars get home!</h3>
+    <canvas id="myCanvas" width="400" height="400"></canvas>
+    <br/>
+    <input id="slider1" type="range" min="0" max="200" />
+    <input id="slider2" type="range" min="0" max="200" />
+    <input id="slider3" type="range" min="0" max="200" />
+    <script type="text/javascript" src="gl-matrix-min.js"></script>
+    <script src="HW4.js" id="module"></script>
+  </body>
+</html>

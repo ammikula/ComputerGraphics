@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Homework 2</title>
+    <style>
+      div.header {
+        max-width: 800px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1><b>CS559: Programming Assignment 2</b></h1>
+    <h5>
+        <p>October 7th, 2021</p>
+        <p>Anna Mikula</p>
+    </h5>
+    <hr></hr>
+    <div class="header">
+      <small>
+        <p>In class, we’ve been learning about transformations (in 2D),
+          create composite transforms by combining elementary ones, and the
+          Canvas transform stack. Now is you chance to try these concepts out! </p>
+        <p>Like the previous assignment, you must make a web page with an HTML5
+          Canvas on it. You must do all the drawing with Canvas. In fact, you must
+          use the canvas transformation commands (i.e. the <b>translate(), scale(), rotate() </b>
+          methods of the drawing context) as opposed to implementing these transforms via
+          some other process.</p>
+        <p>Transformations are helpful all of the time. However, they are really useful
+          when you want to make objects that are hierarchical (have parts that move
+          relative to other parts). They are also really useful for moving things around.
+          An example of a hierarchical model might be a model of a car with spinning wheels:
+          the wheels of the car rotate, but they stay attached to the car as it moves around.
+          Another example would be a quadcopter as demonstrated in the lecture – with 4 propellers
+          that spin while the copter flies around. </p>
+        <ul>
+          <li>Your implementation must demonstrate the use of the HTML Canvas transform stack,
+            in service of the hierarchical modeling concept. <i>If you’re not using the save()/restore()
+            commands in a way similar to how we did in class, you are probably doing this wrong.</i>
+            We would encourage you to be creative! Pick something interesting. </li>
+          <li>It just has to have parts that move relative to each other (e.g. be hierarchical).
+            And it should have at least one part that has two children (like the quadcopter has 4
+            propellers, or a car has 2 wheels). And it has to move by itself to show this off.
+            You do need to animate your object (or objects) in a way that shows off the hierarchy.
+            One possibility is to use “requestAnimationFrame” to do the animation (or setTimeout).
+            It is also OK to use sliders to control the animation, as we have seen in class (instead
+            of the auto-update via the requestAnimationFrame mechanism) if that works best with your
+            particular hierarchical model.</li>
+          <li>Some ideas (but you should be creative!) You could make a car (side view) where the
+             wheels spin while it drives. Or make it a dump truck and the back can tilt up and down.
+             Or a firetruck where the ladder goes up and down. You could make a tree where the branches
+             wave in the wind. How about a clock with two hands (minute/hour), where the clock itself
+             is moving. Maybe have the clock mounted on some other object (a character’s hand?), or
+             have several of them in your scene. A model of the solar system, with planets and their moons?</li>
+        </ul>
+        <p>To compete for a “4” (above-and-beyond) grade we suggest that you model objects with
+          interesting motion, have some added complexity to the hierarchical structure of your object
+          (say, something more than a Y-shaped robotic arm with 2 fingers …), or use components in your
+          model that are particularly creative.</p>
+      </small>
+    </div><!--end of header div -->
+    <hr></hr>
+      <div class="assignment">
+            <canvas id="myCanvas" width="200" height="200" style="background-color:#90DBF9"></canvas>
+            <br/>
+            <input id="slider1" type="range" min="-100" max="100" />
+  	        <br/>
+  	        <input id="slider2" type="range" min="-100" max="100" />
+  	        <br/>
+            <script src="hw2.js" id="module"></script>
+          </div>
+        </body>
+      </html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Homework 1 : Creativity With Shapes</title>
+    <style>
+      div.header {
+        max-width: 800px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1><b>CS559: Programming Assignment 1</b></h1>
+    <h5>
+        <p>September 24th, 2021</p>
+        <p>Anna Mikula</p>
+    </h5>
+    <hr></hr>
+    <div class="header">
+      <small>
+        <p>The goal of this assignment is to have you figure out the programming
+          aspects of drawing pictures on web pages using the JavaScript 2D Canvas library.
+          You should create a new program (as a single HTML file, or even better a separate
+          .html file and a .js file with the JavaScript code, as exemplified in the demos
+          from the GitHub repository) that includes – at minimum – the following visual elements: </p>
+        <i>
+        <ul>
+          <li>You should draw at least one filled shape (e.g. a polygon).</li>
+          <li>You should either have multiple, separate filled shapes
+            or draw some shapes that are not filled alongside the filled polygons,
+            for example polygonal shapes that are only drawn as a line
+            (if you do the latter, make sure that this shape includes more than one line segment).
+            You are welcome to do both, of course, and include multiple filled shapes
+            and multiple line-drawn (non-filled strokes) along them!</li>
+          <li>You must demonstrate the use of more than one color in your drawing.</li>
+          <li>You must include at least one slider in your program, and have it affect
+            the image drawn in some way. For example, it could control the location
+            of one of the polygon vertices being drawn; or it could control the
+            thickness of some line; or it could move an entire shape.</li>
+        </ul>
+        </i>
+        <p>The requirements above are what is asked of you to get a “Satisfactory”
+          grade (i.e. a score of “3”) in the programming assignment.
+          If you want to contend for an “above-and-beyond” grade (i.e. “4”),
+          you should consider drawing something more elaborate.
+          For example (not an exhaustive list) : </p>
+        <i>
+        <ul>
+          <li>Something that creatively combines many shapes to create an interesting appearance.</li>
+          <li>Something that changes shape (perhaps as triggered by the value of the slider) in an interesting way.</li>
+          <li>Something that includes an animation (we will talk about options for that on the September 16th lecture).</li>
+        </ul>
+        </i>
+      </small>
+    </div><!--end of header div -->
+    <hr></hr>
+    <div class="assignment">
+      <canvas id="myCanvas" width="200" height="200">
+      </canvas>
+      <br/>
+      <input id="slider1" type="range" min="0" max="200"><b></b> X</input>
+      <br/>
+      <input id="slider2" type="range" min="0" max="200"><b></b> Y</input>
+      <script src="HW1.js" id="module"></script>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Homework 3 : glMatrix</title>
+    <style>
+      div.description {
+        max-width: 800px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1><b>CS559: Programming Assignment 3</b></h1>
+    <h5>
+        <p>October 22nd, 2021</p>
+        <p>Anna Mikula</p>
+    </h5>
+    <hr></hr>
+    <div class="description">
+      <small>
+        <ul>
+          <li>In your previous programming assignment, you were asked to create a scene with one
+            of more objects that are created according to the principles of hierarchical modeling.
+            In creating such objects, you were asked to leverage the HTML5 Canvas transformation commands
+            (i.e. the translate(), scale(), rotate() methods of the drawing context) and the stack
+            supported within canvas (manipulated via the save(), restore() methods) to create models
+            with multiple components whose transforms hierarchically depend on each other.</li>
+          <li>This assignment, you are asked to implement any transforms using explicit matrix representations,
+            using a matrix/vector library such as glMatrix (Links to an external site.) or
+            TWGL (Links to an external site.) that we discussed in class. Although glMatrix
+            would be gently recommended, since we had the opportunity to cover it in more detail in class,
+            you are absolutely welcome to use TWGL or some other matrix library instead.</li>
+          <li>One possible idea, if you are happy with the result you turned in for Programming Assignment #2
+            would be to first create a version of the same product, that is visually identical to
+            what you implemented using the Canvas transformation functionality, but internally
+            substitute all the calls to the translate(), scale(), rotate() calls (or the save(),
+            restore() methods for the built-in transform stack) with glMatrix transform representations
+            and operations.</li>
+        </ul>
+      </small>
+    </div><!--end of description div -->
+    <hr></hr>
+    <div>
+      <h3>Happy Halloween!</h3>
+      <p><i>help get all the gumballs in the candy bowl</i></p>
+    </div>
+    <canvas id="myCanvas" width="400" height="400"></canvas>
+    <br/>
+    <input id="slider1" type="range" min="-200" max="100" />
+    <br/>
+    <input id="slider2" type="range" min="-100" max="100" />
+    <br/>
+    <input id="slider3" type="range" min="-100" max="100" />
+    <script type="text/javascript" src="gl-matrix-min.js"></script>
+    <script src="HW3.js" id="module"></script>
+  </body>
+</html>
